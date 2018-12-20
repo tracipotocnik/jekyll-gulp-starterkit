@@ -1,11 +1,14 @@
 @charset "utf-8";
 
+@import "breakpoint-sass/stylesheets/breakpoint";
+
 /* Configuration and helpers */
 @import "utilities/variables";
 @import "utilities/functions";
 @import "utilities/mixins";
 
 /* Third-party */
+
 /* e.g. @import "vendor/normalize"; */
 
 /* Base */

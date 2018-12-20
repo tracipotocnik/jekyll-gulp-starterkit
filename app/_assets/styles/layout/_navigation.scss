@@ -16,7 +16,7 @@
     }
   }
 
-  @media screen and (width <= $on-palm) {
+  @media screen and (max-width: $on-palm) {
     position: absolute;
     top: 9px;
     right: 30px;

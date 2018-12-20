@@ -1,18 +1,16 @@
 # gulp-jekyll
 
-Jekyll + Gulp.js + BrowserSync + PostCSS + Stylelint
+Jekyll + Gulp.js + BrowserSync + SCSS + Stylelint
 
 ## Features
 
-- PostCSS with [postcss-advanced-variables](https://github.com/jonathantneal/postcss-advanced-variables), [postcss-preset-env](https://github.com/csstools/postcss-preset-env) (includes Autoprefixer), [postcss-nested](https://github.com/postcss/postcss-nested), [CSS MQPacker](https://github.com/hail2u/node-css-mqpacker), and [cssnano](https://github.com/cssnano/cssnano).
+- Sass.
 - UnCSS for production.
 - Jekyll build and rebuild with BrowserSync live reload.
 - Browserify or just gulp-concat, as you prefer.
 - Optimization (and minification) of images, HTML, CSS, JavaScript, JSON, and XML files.
 - Linting with JSHint and Stylelint.
-- Extensive Stylelint config, based on my [code-guide](https://github.com/michaelx/code-guide).
 - Sourcemap generation.
-- Responsive image creation, or image resizing, through either GraphicsMagick or ImageMagick.
 - Image sprites.
 - Gzip compression.
 - Asset file revisions.
@@ -70,45 +68,6 @@ $ gulp deploy
 - Running `gulp` will start a development server, build assets and the Jekyll site and start a `watch` task.
 - Running `gulp publish` will copy and optimize assets and run a production build of Jekyll.
 - Running `gulp deploy` will copy the generated files with Rsync to your server.
-
-## CSS File Organization
-
-gulp-jekyll uses a 5-1 pattern, which is abstracted from the [7-1 pattern](https://sass-guidelin.es/#architecture). 5 folders, 1 file to compile them all in a single CSS file.
-
-```bash
-styles/
-|
-|- utilities/            # Configuration and helpers
-|   |- _variables.css    # Global variables
-|   |- _functions.css
-|   |- _mixins.css
-|   …
-|
-|- vendor/               # Third-party CSS
-|   |- _normalize.css
-|   …
-|
-|- base/                 # Boilerplate code
-|   |- _reset.css
-|   |- _base.css
-|   |- _typography.css
-|   …
-|
-|- layout/               # Global wireframe (macro)
-|   |- _header.css
-|   |- _navigation.css
-|   |- _sidebar.css
-|   |- _footer.css
-|   …
-|
-|- components/           # Modules (micro)
-|   |- _buttons.css
-|   |- _cards.css
-|   |- _tables.css
-|   …
-|
-`- main.css              # Main file to import everything
-```
 
 ---
 

@@ -59,8 +59,8 @@ module.exports = {
       src + '/**/*.{html,markdown,md,yml,json,txt,xml}',
       src + '/*'
     ],
-    styles:  srcAssets + '/styles/**/*.css',
-    scripts: srcAssets + '/javascripts/**/*.js',
+    styles:  srcAssets + '/styles/**/*.scss',
+    scripts: srcAssets + '/js/**/*.js',
     images:  srcAssets + '/images/**/*',
     sprites: srcAssets + '/images/**/*.png',
     svg:     srcAssets + '/images/**/*.svg',
@@ -88,44 +88,35 @@ module.exports = {
 
   // CSS
   styles: {
-    src:  srcAssets + '/styles/*.css',
-    dest: developmentAssets + '/css',
-    options: {
-      advancedVariables: {},
-      presetEnv: {
-        autoprefixer: {
-          cascade: true
-        }
-      },
-      nested: {},
-      mqpacker: { sort: true },
-      cssnano: {}
-    }
+    src:  srcAssets + '/styles/*.scss',
+    dest: developmentAssets + '/css'
   },
 
   // Lint CSS files, but none in /vendor/
   lintStyles: {
     src: [
-      srcAssets + '/styles/**/*.css',
+      srcAssets + '/styles/**/*.scss',
       '!' + srcAssets + '/styles/vendor/**'
     ],
     options: {
-      stylelint: {}, // Using .stylelintrc
-      reporter: {
-        clearReportedMessages: true
-      }
+      stylelint: {
+        reporters: [
+          {formatter: 'string', console: true}
+        ],
+        syntax: 'scss'
+      }, // Using .stylelintrc
     }
   },
 
   // JavaScript, if Browserify is not used
   scripts: {
     src: [
-      srcAssets + '/javascripts/**/*.js'
+      srcAssets + '/js/**/*.js'
     ],
     dest: developmentAssets + '/js',
     outputName: 'main.js',
     standaloneFiles: [
-      // srcAssets + '/javascripts/example-vendor.js'
+      // srcAssets + '/js/example-vendor.js'
     ]
   },
 
@@ -143,11 +134,11 @@ module.exports = {
     // app.js is loaded at the bottom, and contains
     // everything that can be loaded after rendering.
     bundleConfigs: [{
-      entries:    './' + srcAssets + '/javascripts/app.js',
+      entries:    './' + srcAssets + '/js/app.js',
       dest:       developmentAssets + '/js',
       outputName: 'app.js'
     }, {
-      entries:    './' + srcAssets + '/javascripts/head.js',
+      entries:    './' + srcAssets + '/js/head.js',
       dest:       developmentAssets + '/js',
       outputName: 'head.js'
     }]
@@ -155,21 +146,7 @@ module.exports = {
 
   // Lint JavaScript files
   lintJs: {
-    src: srcAssets + '/javascripts/*.js'
-  },
-
-  // Responsive image generation
-  responsiveImages: {
-    src:  srcAssets + '/images/example/*.jpg',
-    dest: developmentAssets + '/images/example',
-    outputSuffix: '-768',
-    options: {
-      imageMagick: false,
-      width : 768,
-      quality: 0.85,
-      filter: 'Lanczos',
-      sharpen: '2x0.5+0.5+0'
-    }
+    src: srcAssets + '/js/*.js'
   },
 
   // WebP image generation
@@ -206,19 +183,6 @@ module.exports = {
       },
       imgName: 'icon-sprite.png',
       imgPath: '/assets/images/sprites/icon-sprite.png'
-    }
-  },
-
-  // Base64
-  // @NOTE: Not used.
-  base64: {
-    src: developmentAssets + '/css/*.css',
-    dest: developmentAssets + '/css',
-    options: {
-      baseDir: build,
-      extensions: ['png'],
-      maxImageSize: 20 * 1024, // bytes
-      debug: false
     }
   },
 
@@ -270,11 +234,6 @@ module.exports = {
     json: {
       src:  production + '/**/*.json',
       dest: production
-    },
-    xml: {
-      src:  production + '/**/*.xml',
-      dest: production,
-      options: { type: 'minify' }
     },
     images: {
       src:  developmentAssets + '/images/**/*.{jpg,jpeg,png,gif,svg}',
@@ -345,18 +304,9 @@ module.exports = {
   collect: {
     src: [
       productionAssets + '/manifest.json',
-      production + '/**/*.{html,xml,txt,json,css,js}',
-      '!' + production + '/feed.xml'
+      production + '/**/*.{html,xml,txt,json,css,js}'
     ],
     dest: production
-  },
-
-  // GZIP compression
-  // @NOTE: Not used, done with s3_website.
-  gzip: {
-    src: production + '/**/*.{html,xml,json,css,js}',
-    dest: production,
-    options: {}
   },
 
   // rsync to staging server
