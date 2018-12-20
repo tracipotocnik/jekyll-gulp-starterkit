@@ -5,7 +5,6 @@ Jekyll + Gulp.js + BrowserSync + SCSS + Stylelint
 ## Features
 
 - Sass.
-- UnCSS for production.
 - Jekyll build and rebuild with BrowserSync live reload.
 - Browserify or just gulp-concat, as you prefer.
 - Optimization (and minification) of images, HTML, CSS, JavaScript, JSON, and XML files.
